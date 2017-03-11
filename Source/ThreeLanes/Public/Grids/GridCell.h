@@ -16,7 +16,7 @@ class THREELANES_API AGridCell : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleAnywhere)
-	USceneComponent* SceneRoot;
+	UStaticMeshComponent* SceneRoot;
 
 	int32 X;
 	int32 Y;
@@ -37,4 +37,6 @@ public:
 	AGridCell();
 
 	void Initialize(AGrid* NewMaster, int32 X, int32 Y);
+
+	void SetDebugDraw(bool bNew);
 };

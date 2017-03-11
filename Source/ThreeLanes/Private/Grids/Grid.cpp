@@ -34,6 +34,23 @@ void AGrid::InitializeGrid(int32 X, int32 Y)
 	}
 }
 
+#if WITH_EDITOR
+void AGrid::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AGrid, bDrawDebug))
+	{
+		UE_LOG(LogGrid, Log, TEXT("bDrawDebug got toggled!"));
+		for (AGridCell* Cell : Cells)
+		{
+			Cell->SetDebugDraw(bDrawDebug);
+		}
+	}
+
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+}
+#endif
+
 void AGridTest::BeginPlay()
 {
 	Super::BeginPlay();

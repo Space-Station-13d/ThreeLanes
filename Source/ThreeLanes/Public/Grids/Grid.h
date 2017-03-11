@@ -24,6 +24,11 @@ class THREELANES_API AGrid : public AActor
 	UPROPERTY()
 	int32 DimensionY;
 
+protected:
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 public:
 	// Sets default values for this actor's properties
 	AGrid();
@@ -32,6 +37,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FVector2D CellSize;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool bDrawDebug;
 };
 
 UCLASS(BlueprintType)
@@ -43,9 +51,9 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category=Grid)
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Grid")
 	int32 X;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = Grid)
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Grid")
 	int32 Y;
 };
