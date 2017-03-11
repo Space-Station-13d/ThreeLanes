@@ -4,3 +4,5 @@
 
 #include "Engine.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(LogMain, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogGrid, Log, All);
