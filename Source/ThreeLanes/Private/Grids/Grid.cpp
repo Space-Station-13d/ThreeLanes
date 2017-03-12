@@ -29,9 +29,19 @@ void AGrid::InitializeGrid(int32 X, int32 Y)
 			AGridCell* NewCell = (AGridCell*)GetWorld()->SpawnActor(AGridCell::StaticClass());
 			NewCell->Initialize(this, x, y);
 			Cells.Push(NewCell);
-			UE_LOG(LogGrid, Log, TEXT("Initialized cell at (%d, %d)"), x, y);
+			// UE_LOG(LogGrid, Log, TEXT("Initialized cell at (%d, %d)"), x, y);
 		}
 	}
+}
+
+AGridCell* AGrid::GetCell(int32 X, int32 Y)
+{
+	if (X >= DimensionX || Y >= DimensionY)
+	{
+		return nullptr;
+	}
+
+	return Cells[X + Y*DimensionX];
 }
 
 #if WITH_EDITOR
@@ -56,4 +66,20 @@ void AGridTest::BeginPlay()
 	Super::BeginPlay();
 
 	InitializeGrid(X, Y);
+
+	for (int32 x = 0; x < X; x++)
+	{
+		for (int32 y = 0; y < Y; y++)
+		{
+			AGridCell* Cell = GetCell(x, y);
+			if (!Cell->IsValidLowLevel())
+			{
+				UE_LOG(LogGrid, Error, TEXT("GetCell returned no cell at all for coordinates (%d, %d)!"), x, y);
+			}
+			else if (Cell->X != x || Cell->Y != y)
+			{
+				UE_LOG(LogGrid, Error, TEXT("GetCell returned incorrect cell. Requested: (%d,%d), Returned: (%d,%d)"), x, y, Cell->X, Cell->Y);
+			}
+		}
+	}
 }

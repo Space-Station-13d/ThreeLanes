@@ -45,14 +45,5 @@ void AGridCell::Initialize(AGrid* NewMaster, int32 NewX, int32 NewY)
 
 void AGridCell::SetDebugDraw(bool bNew)
 {
-	if (bNew)
-	{
-		UE_LOG(LogGrid, Log, TEXT("New: true"), bNew);
-	}
-	else
-	{
-		UE_LOG(LogGrid, Log, TEXT("New: false"), bNew);
-	}
-
 	SceneRoot->SetVisibility(bNew);
 }

@@ -18,9 +18,6 @@ class THREELANES_API AGridCell : public AActor
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* SceneRoot;
 
-	int32 X;
-	int32 Y;
-
 	UPROPERTY()
 	AGrid* Master;
 
@@ -39,4 +36,10 @@ public:
 	void Initialize(AGrid* NewMaster, int32 X, int32 Y);
 
 	void SetDebugDraw(bool bNew);
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 X;
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 Y;
 };

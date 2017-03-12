@@ -40,6 +40,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bDrawDebug;
+
+	UFUNCTION(BlueprintCallable)
+	AGridCell* GetCell(int32 X, int32 Y);
 };
 
 UCLASS(BlueprintType)
