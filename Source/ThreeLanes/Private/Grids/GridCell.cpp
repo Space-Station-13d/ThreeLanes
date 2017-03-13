@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ThreeLanes.h"
-#include "GridCell.h"
-#include "Grid.h"
+#include "Grids/GridCell.h"
+#include "Grids/Grid.h"
+#include "Grids/TerrainFeature.h"
 
 // Sets default values
 AGridCell::AGridCell()
@@ -46,4 +47,34 @@ void AGridCell::Initialize(AGrid* NewMaster, int32 NewX, int32 NewY)
 void AGridCell::SetDebugDraw(bool bNew)
 {
 	SceneRoot->SetVisibility(bNew);
+}
+
+ATerrainFeature* AGridCell::GetTerrainFeature()
+{
+	return TerrainFeature;
+}
+
+void AGridCell::SetTerrainFeature(ATerrainFeature* New)
+{
+	TerrainFeature = New;
+}
+
+void AGridCell::ClearTerrainFeature()
+{
+	TerrainFeature = nullptr;
+}
+
+UGriddable* AGridCell::GetCurrent()
+{
+	return nullptr;
+}
+
+void AGridCell::SetCurrent(UGriddable* New)
+{
+	Current = New;
+}
+
+void AGridCell::ClearCurrent()
+{
+	Current = nullptr;
 }

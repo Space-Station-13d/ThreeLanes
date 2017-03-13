@@ -42,4 +42,22 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	int32 Y;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	ATerrainFeature* GetTerrainFeature();
+
+	UFUNCTION(BlueprintCallable)
+	void SetTerrainFeature(ATerrainFeature* New);
+
+	UFUNCTION(BlueprintCallable)
+	void ClearTerrainFeature();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UGriddable* GetCurrent();
+
+	UFUNCTION(BlueprintCallable)
+	void SetCurrent(UGriddable* New);
+
+	UFUNCTION(BlueprintCallable)
+	void ClearCurrent();
 };

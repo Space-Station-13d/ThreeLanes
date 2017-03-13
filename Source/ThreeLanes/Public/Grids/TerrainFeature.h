@@ -9,11 +9,8 @@ UCLASS(BlueprintType, Blueprintable)
 class THREELANES_API ATerrainFeature : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ATerrainFeature();
-
-	
-	
 };
