@@ -10,6 +10,19 @@ class ATerrainFeature;
 class UGriddable;
 class AGrid;
 
+UENUM(BlueprintType)
+enum class EGridNeighbor : uint8
+{
+	// Positive Y.
+	North,
+	// Negative Y.
+	South,
+	// Positive X.
+	East,
+	// Negative X.
+	West
+};
+
 UCLASS(BlueprintType)
 class THREELANES_API AGridCell : public AActor
 {
@@ -60,4 +73,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ClearCurrent();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	AGridCell* GetRelative(int32 RelX=0, int32 RelY=0);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	AGridCell* GetNeighbor(EGridNeighbor Neighbor);
 };

@@ -78,3 +78,32 @@ void AGridCell::ClearCurrent()
 {
 	Current = nullptr;
 }
+
+AGridCell* AGridCell::GetRelative(int32 RelX, int32 RelY)
+{
+	return Master->GetCell(X + RelX, Y + RelY);
+}
+
+AGridCell* AGridCell::GetNeighbor(EGridNeighbor Neighbor)
+{
+	int32 RelX = 0;
+	int32 RelY = 0;
+
+	switch (Neighbor)
+	{
+		case EGridNeighbor::North:
+			RelY = 1;
+			break;
+		case EGridNeighbor::South:
+			RelY = -1;
+			break;
+		case EGridNeighbor::East:
+			RelX = 1;
+			break;
+		case EGridNeighbor::West:
+			RelX = -1;
+			break;
+	}
+
+	return GetRelative(RelX, RelY);
+}

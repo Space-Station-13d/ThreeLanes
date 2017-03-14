@@ -36,7 +36,7 @@ void AGrid::InitializeGrid(int32 X, int32 Y)
 
 AGridCell* AGrid::GetCell(int32 X, int32 Y)
 {
-	if (X >= DimensionX || Y >= DimensionY)
+	if (X >= DimensionX || X < 0 || Y >= DimensionY || Y < 0)
 	{
 		return nullptr;
 	}
