@@ -4,6 +4,7 @@
 #include "Grids/GridCell.h"
 #include "Grids/Grid.h"
 #include "Grids/TerrainFeature.h"
+#include "Grids/Griddable.h"
 
 // Sets default values
 AGridCell::AGridCell()
@@ -71,12 +72,28 @@ UGriddable* AGridCell::GetCurrent()
 
 void AGridCell::SetCurrent(UGriddable* New)
 {
+	if (!New->IsValidLowLevel())
+	{
+		// Let's NOT segfault.
+		return;
+	}
+
+	if (New->GetCell() != nullptr)
+	{
+		AGridCell* Other = New->GetCell();
+		Other->ClearCurrent();
+	}
 	Current = New;
+	New->Attach(this);
 }
 
 void AGridCell::ClearCurrent()
 {
-	Current = nullptr;
+	if (Current->IsValidLowLevel())
+	{
+		Current->Detach();
+		Current = nullptr;
+	}
 }
 
 AGridCell* AGridCell::GetRelative(int32 RelX, int32 RelY)

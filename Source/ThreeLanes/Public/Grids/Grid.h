@@ -33,16 +33,28 @@ public:
 	// Sets default values for this actor's properties
 	AGrid();
 
-	UFUNCTION(BlueprintCallable)
+	/**
+	 * Initialize a grid with a specific size. It is an error to call this more than once.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Grid")
 	void InitializeGrid(int32 X, int32 Y);
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	/**
+	 * The size each cell is assumed to be. This determines how far the cells are placed from each other.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Grid")
 	FVector2D CellSize;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	/**
+	 * Enables debug drawing, which makes the cells be visible.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Grid")
 	bool bDrawDebug;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	/**
+	 * Get a cell at specific coordinates.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
 	AGridCell* GetCell(int32 X, int32 Y);
 };
 

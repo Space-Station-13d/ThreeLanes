@@ -38,7 +38,9 @@ class THREELANES_API AGridCell : public AActor
 	UPROPERTY()
 	ATerrainFeature* TerrainFeature;
 
-	// The current thing on this tile.
+	/**
+	 * The thing that's currently attached to us.
+	 */
 	UPROPERTY()
 	UGriddable* Current;
 
@@ -50,36 +52,51 @@ public:
 
 	void SetDebugDraw(bool bNew);
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category="Grid")
 	int32 X;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category="Grid")
 	int32 Y;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
 	ATerrainFeature* GetTerrainFeature();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="Grid")
 	void SetTerrainFeature(ATerrainFeature* New);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="Grid")
 	void ClearTerrainFeature();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	/**
+	 * Get the currently attached object.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid", meta=(DisplayName="Get Contents"))
 	UGriddable* GetCurrent();
 
-	UFUNCTION(BlueprintCallable)
+	/**
+	 * Sets the currently attached object.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Grid", meta=(DisplayName="Set Contents"))
 	void SetCurrent(UGriddable* New);
 
-	UFUNCTION(BlueprintCallable)
+	/**
+	 * Clears the currently attached object.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Grid", meta=(DisplayName="Clear Contents"))
 	void ClearCurrent();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	/**
+	 * Returns a cell with coordinates relative to us.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
 	AGridCell* GetRelative(int32 RelX=0, int32 RelY=0);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	/**
+	 * Gets a cell neighboring us.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
 	AGridCell* GetNeighbor(EGridNeighbor Neighbor);
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
 	AGrid* GetMaster();
 };

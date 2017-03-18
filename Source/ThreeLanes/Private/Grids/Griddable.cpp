@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ThreeLanes.h"
-#include "Griddable.h"
-
+#include "Grids/Griddable.h"
+#include "Grids/GridCell.h"
 
 // Sets default values for this component's properties
 UGriddable::UGriddable()
@@ -21,7 +21,7 @@ void UGriddable::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+
 }
 
 
@@ -33,3 +33,17 @@ void UGriddable::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 	// ...
 }
 
+AGridCell* UGriddable::GetCell()
+{
+	return Cell;
+}
+
+void UGriddable::Attach(AGridCell* NewCell)
+{
+	Cell = NewCell;
+}
+
+void UGriddable::Detach()
+{
+	Cell = nullptr;
+}
