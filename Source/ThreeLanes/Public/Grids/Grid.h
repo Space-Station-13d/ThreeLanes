@@ -33,6 +33,7 @@ public:
 	// Sets default values for this actor's properties
 	AGrid();
 
+	UFUNCTION(BlueprintCallable)
 	void InitializeGrid(int32 X, int32 Y);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

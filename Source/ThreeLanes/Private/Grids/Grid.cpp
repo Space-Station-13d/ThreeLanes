@@ -16,6 +16,11 @@ AGrid::AGrid()
 
 void AGrid::InitializeGrid(int32 X, int32 Y)
 {
+	if (Cells.Num() != 0)
+	{
+		UE_LOG(LogGrid, Error, TEXT("Attempted to initialize a grid that has already been initialized!"));
+		return;
+	}
 	DimensionX = X;
 	DimensionY = Y;
 

@@ -107,3 +107,8 @@ AGridCell* AGridCell::GetNeighbor(EGridNeighbor Neighbor)
 
 	return GetRelative(RelX, RelY);
 }
+
+AGrid* AGridCell::GetMaster()
+{
+	return Master;
+}

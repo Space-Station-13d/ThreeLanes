@@ -79,4 +79,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	AGridCell* GetNeighbor(EGridNeighbor Neighbor);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	AGrid* GetMaster();
 };
