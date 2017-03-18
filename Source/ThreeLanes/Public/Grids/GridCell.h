@@ -44,12 +44,19 @@ class THREELANES_API AGridCell : public AActor
 	UPROPERTY()
 	UGriddable* Current;
 
+	UPROPERTY(EditAnywhere)
+	FVector ContentOffset;
+
+protected:
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+
 public:
 	// Sets default values for this actor's properties
 	AGridCell();
 
 	void Initialize(AGrid* NewMaster, int32 X, int32 Y);
-
 	void SetDebugDraw(bool bNew);
 
 	UPROPERTY(BlueprintReadOnly, Category="Grid")
@@ -99,4 +106,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
 	AGrid* GetMaster();
+
+	/**
+	 * Gets the offset that the contents will be relative to the cell.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Grid")
+	FVector GetContentOffset();
+
+	/**
+	 * Sets the offset that the contents will be relative to the cell.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Grid")
+	void SetContentOffset(FVector Offset);
 };

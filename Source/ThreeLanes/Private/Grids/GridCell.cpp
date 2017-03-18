@@ -67,7 +67,7 @@ void AGridCell::ClearTerrainFeature()
 
 UGriddable* AGridCell::GetCurrent()
 {
-	return nullptr;
+	return Current;
 }
 
 void AGridCell::SetCurrent(UGriddable* New)
@@ -85,6 +85,9 @@ void AGridCell::SetCurrent(UGriddable* New)
 	}
 	Current = New;
 	New->Attach(this);
+	AActor* Actor = Current->GetOwner();
+	Actor->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+	Actor->SetActorRelativeLocation(ContentOffset);
 }
 
 void AGridCell::ClearCurrent()
@@ -92,6 +95,7 @@ void AGridCell::ClearCurrent()
 	if (Current->IsValidLowLevel())
 	{
 		Current->Detach();
+		Current->GetOwner()->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		Current = nullptr;
 	}
 }
@@ -129,3 +133,31 @@ AGrid* AGridCell::GetMaster()
 {
 	return Master;
 }
+
+FVector AGridCell::GetContentOffset()
+{
+	return ContentOffset;
+}
+
+void AGridCell::SetContentOffset(FVector Offset)
+{
+	ContentOffset = Offset;
+	if (Current->IsValidLowLevel())
+	{
+		AActor* Actor = Current->GetOwner();
+		Actor->SetActorRelativeLocation(Offset);
+	}
+}
+
+#if WITH_EDITOR
+void AGridCell::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	FName PropertyName = (PropertyChangedEvent.MemberProperty != nullptr) ? PropertyChangedEvent.MemberProperty->GetFName() : NAME_None;
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AGridCell, ContentOffset) && Current->IsValidLowLevel())
+	{
+		Current->GetOwner()->SetActorRelativeLocation(ContentOffset);
+	}
+
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+}
+#endif
